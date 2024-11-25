@@ -14,6 +14,7 @@ model User {
   password   String
   createdAt  DateTime   @default(now())
   developer  Developer? // 1:1 relation to Developer (optional because not every user is a developer)
+  isAdmin    Boolean    @default(false)
 }
 
 model Developer {
