@@ -7,6 +7,31 @@ generator client {
   provider = "prisma-client-js"
 }
 
+model User {
+  id         String     @id @default(uuid())
+  username   String     @unique
+  email      String     @unique
+  password   String
+  createdAt  DateTime   @default(now())
+  developer  Developer? // 1:1 relation to Developer (optional because not every user is a developer)
+}
+
+model Developer {
+  id          String        @id @default(uuid())
+  userId      String        @unique  @default(uuid())   // 1:1 relation to User
+  user        User       @relation(fields: [userId], references: [id])
+  bio         String?    // Optional developer bio
+  techTags    TechTag[]  // Many-to-many relation to TechTag
+  createdAt   DateTime   @default(now())
+}
+
+model TechTag {
+  id          String     @id @default(uuid())
+  name        String     @unique  
+  developers  Developer[] // Many-to-many relation to Developer
+  createdAt   DateTime   @default(now())
+}
+
 model Client {
   id        String     @id @default(uuid())
   name      String
