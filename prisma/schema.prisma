@@ -26,7 +26,7 @@ model Developer {
   lastName    String     
   rate        String
   bio         String?    // Optional developer bio
-  skills    Skill[]?  // Many-to-many relation to TechTag
+  skills    Skill[]  // Many-to-many relation to TechTag
   createdAt   DateTime   @default(now())
 }
 
