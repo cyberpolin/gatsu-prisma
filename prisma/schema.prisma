@@ -12,21 +12,24 @@ model User {
   username   String     @unique
   email      String     @unique
   password   String
+  verified   Boolean    @default(false)
   createdAt  DateTime   @default(now())
   developer  Developer? // 1:1 relation to Developer (optional because not every user is a developer)
   isAdmin    Boolean    @default(false)
 }
 
 model Developer {
-  id          String        @id @default(uuid())
-  userId      String        @unique  @default(uuid())   // 1:1 relation to User
+  id          String     @id @default(uuid())
+  userId      String     @unique  @default(uuid())   // 1:1 relation to User
   user        User       @relation(fields: [userId], references: [id])
+  name        String     
+  lastName    String     
   bio         String?    // Optional developer bio
-  techTags    TechTag[]  // Many-to-many relation to TechTag
+  skills    Skill[]  // Many-to-many relation to TechTag
   createdAt   DateTime   @default(now())
 }
 
-model TechTag {
+model Skill {
   id          String     @id @default(uuid())
   name        String     @unique  
   developers  Developer[] // Many-to-many relation to Developer
