@@ -32,7 +32,7 @@ model Developer {
 
 model Skill {
   id          String     @id @default(uuid())
-  name        String     @unique  
+  name        String       
   developers  Developer[] // Many-to-many relation to Developer
   createdAt   DateTime   @default(now())
 }
