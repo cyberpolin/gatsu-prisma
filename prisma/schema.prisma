@@ -24,6 +24,7 @@ model Developer {
   user        User       @relation(fields: [userId], references: [id])
   name        String     
   lastName    String     
+  rate        String
   bio         String?    // Optional developer bio
   skills    Skill[]  // Many-to-many relation to TechTag
   createdAt   DateTime   @default(now())
